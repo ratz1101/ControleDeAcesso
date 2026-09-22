@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="360.0" prefWidth="460.0" spacing="24.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.acesso.view.LoginController">
+    <padding>
+        <Insets bottom="28.0" left="40.0" right="40.0" top="28.0" />
+    </padding>
+    <children>
+        <Label style="-fx-font-size: 26px; -fx-font-weight: bold;" text="Controle de Acesso" />
+        <Label style="-fx-font-size: 14px;" text="Acesso administrativo" />
+        <GridPane hgap="12.0" vgap="14.0" maxWidth="360.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" minWidth="75.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+            <children>
+                <Label text="Login" />
+                <TextField fx:id="txtLogin" promptText="Digite seu login" GridPane.columnIndex="1" />
+                <Label text="Senha" GridPane.rowIndex="1" />
+                <PasswordField fx:id="pwdSenha" promptText="Digite sua senha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+        <Button defaultButton="true" onAction="#btnLoginAction" prefWidth="140.0" text="Entrar" />
+        <Label style="-fx-font-size: 11px;" />
+    </children>
+</VBox>

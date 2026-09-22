@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="painelPrincipal" prefHeight="480.0" prefWidth="720.0"
+            styleClass="tela-principal"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controle.acesso.view.PrincipalController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu text="Menu">
+                    <items>
+                        <MenuItem onAction="#abrirCadastroUsuario" text="Cadastrar Usuário" />
+                        <MenuItem onAction="#abrirListaUsuarios" text="Listar Usuários" />
+                        <MenuItem onAction="#sair" text="Sair" />
+                    </items>
+                </Menu>
+                <Menu text="Relatórios">
+                    <items>
+                        <MenuItem onAction="#abrirHistorico" text="Histórico de Acessos" />
+                        <MenuItem onAction="#abrirRelatorioFrequencia" text="Relatório de Frequência" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <Label fx:id="lblBoasVindas"
+               styleClass="titulo-boas-vindas"
+               text="Bem-vindo!"
+               BorderPane.alignment="CENTER" />
+    </center>
+</BorderPane>

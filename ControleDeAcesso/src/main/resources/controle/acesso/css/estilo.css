@@ -1,0 +1,45 @@
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: #f5f7fa;
+}
+
+.label {
+    -fx-text-fill: #263238;
+}
+
+.button {
+    -fx-padding: 8 18 8 18;
+    -fx-cursor: hand;
+}
+
+.text-field, .password-field, .combo-box {
+    -fx-pref-height: 34px;
+}
+
+.table-view {
+    -fx-border-color: #d0d7de;
+    -fx-background-color: white;
+}
+
+.table-view .column-header {
+    -fx-font-weight: bold;
+}
+
+.menu-bar {
+    -fx-padding: 4px;
+    -fx-background-color: #e9eef3;
+}
+
+.menu-bar .menu:hover,
+.menu-bar .menu:showing {
+    -fx-background-color: #d7e1ea;
+}
+
+.tela-principal {
+    -fx-background-color: #f5f7fa;
+}
+
+.titulo-boas-vindas {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
