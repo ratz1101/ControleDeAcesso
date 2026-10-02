@@ -88,3 +88,19 @@ SELECT 'Usuário de Teste', '000.000.000-00', 'Professor', 'teste@ifsul.edu.br',
 WHERE NOT EXISTS (
     SELECT 1 FROM usuario WHERE cpf = '000.000.000-00'
 );
+
+-- Registros de exemplo de log_acesso, para já ter dados no Histórico,
+-- no Dashboard e no Relatório de Frequência. Só insere na primeira execução.
+INSERT INTO log_acesso (id_usuario, data_hora, tipo_acesso, resultado, motivo)
+SELECT u.id_usuario, x.data_hora, x.tipo_acesso, x.resultado, x.motivo
+FROM usuario u
+CROSS JOIN (
+    SELECT DATE_SUB(NOW(), INTERVAL 3 DAY) AS data_hora, 'ENTRADA' AS tipo_acesso, 'AUTORIZADO' AS resultado, NULL AS motivo
+    UNION ALL SELECT DATE_ADD(DATE_SUB(NOW(), INTERVAL 3 DAY), INTERVAL 8 HOUR), 'SAIDA', 'AUTORIZADO', NULL
+    UNION ALL SELECT DATE_SUB(NOW(), INTERVAL 2 DAY), 'ENTRADA', 'AUTORIZADO', NULL
+    UNION ALL SELECT DATE_ADD(DATE_SUB(NOW(), INTERVAL 2 DAY), INTERVAL 8 HOUR), 'SAIDA', 'AUTORIZADO', NULL
+    UNION ALL SELECT NOW(), 'ENTRADA', 'AUTORIZADO', NULL
+    UNION ALL SELECT DATE_SUB(NOW(), INTERVAL 1 DAY), 'ENTRADA', 'NEGADO', 'Fora do horário permitido'
+) x
+WHERE u.cpf = '000.000.000-00'
+  AND NOT EXISTS (SELECT 1 FROM log_acesso WHERE id_usuario = u.id_usuario);

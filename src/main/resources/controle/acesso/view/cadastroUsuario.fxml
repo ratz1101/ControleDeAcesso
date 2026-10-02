@@ -16,32 +16,42 @@
         <Insets bottom="24.0" left="28.0" right="28.0" top="24.0" />
     </padding>
     <children>
-        <Label style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Cadastro de Usuário" />
-        <Label text="Preencha os dados do funcionário ou professor." />
-        <GridPane hgap="12.0" vgap="12.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" minWidth="90.0" />
-                <ColumnConstraints hgrow="ALWAYS" />
-            </columnConstraints>
+        <VBox spacing="2.0">
             <children>
-                <Label text="Nome *" />
-                <TextField fx:id="txtNome" promptText="Nome completo" GridPane.columnIndex="1" />
-                <Label text="CPF *" GridPane.rowIndex="1" />
-                <TextField fx:id="txtCpf" promptText="000.000.000-00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label text="Cargo *" GridPane.rowIndex="2" />
-                <ComboBox fx:id="cmbCargo" promptText="Professor, Administrativo..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label text="E-mail *" GridPane.rowIndex="3" />
-                <TextField fx:id="txtEmail" promptText="email@exemplo.com" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label text="Senha *" GridPane.rowIndex="4" />
-                <PasswordField fx:id="txtSenha" promptText="Senha de acesso" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label text="Status *" GridPane.rowIndex="5" />
-                <ComboBox fx:id="cmbStatus" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label styleClass="titulo-pagina" text="Cadastro de Usuário" />
+                <Label styleClass="subtitulo-pagina" text="Preencha os dados do funcionário ou professor." />
             </children>
-        </GridPane>
-        <HBox alignment="CENTER_RIGHT" spacing="10.0">
-            <Button onAction="#btnLimparAction" text="Limpar" />
-            <Button defaultButton="true" onAction="#btnCadastrarAction" text="Cadastrar" />
-        </HBox>
-        <Label style="-fx-font-size: 11px;" text="* Campos obrigatórios" />
+        </VBox>
+        <VBox styleClass="painel" spacing="16.0">
+            <children>
+                <GridPane hgap="12.0" vgap="12.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="90.0" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    <children>
+                        <Label text="Nome *" />
+                        <TextField fx:id="txtNome" promptText="Nome completo" GridPane.columnIndex="1" />
+                        <Label text="CPF *" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtCpf" promptText="000.000.000-00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Cargo *" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cmbCargo" promptText="Professor, Funcionário..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="E-mail *" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtEmail" promptText="email@exemplo.com" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Senha *" GridPane.rowIndex="4" />
+                        <PasswordField fx:id="txtSenha" promptText="Senha de acesso" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Status *" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="cmbStatus" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    </children>
+                </GridPane>
+                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                    <children>
+                        <Button onAction="#btnLimparAction" text="Limpar" />
+                        <Button styleClass="button-primario" defaultButton="true" onAction="#btnCadastrarAction" text="Cadastrar" />
+                    </children>
+                </HBox>
+                <Label styleClass="subtitulo-pagina" text="* Campos obrigatórios" />
+            </children>
+        </VBox>
     </children>
 </VBox>

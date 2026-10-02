@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="16.0" styleClass="tela-principal" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.acesso.view.EditarUsuarioController">
+    <padding>
+        <Insets bottom="24.0" left="28.0" right="28.0" top="24.0" />
+    </padding>
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <children>
+                <Label styleClass="titulo-pagina" text="Editar Usuário" />
+                <Label fx:id="lblIdUsuario" styleClass="subtitulo-pagina" text="#0" />
+            </children>
+        </HBox>
+        <GridPane hgap="12.0" vgap="12.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" minWidth="90.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+            <children>
+                <Label text="Nome *" />
+                <TextField fx:id="txtNome" promptText="Nome completo" GridPane.columnIndex="1" />
+                <Label text="CPF *" GridPane.rowIndex="1" />
+                <TextField fx:id="txtCpf" promptText="000.000.000-00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Cargo *" GridPane.rowIndex="2" />
+                <ComboBox fx:id="cmbCargo" promptText="Professor, Funcionário..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="E-mail *" GridPane.rowIndex="3" />
+                <TextField fx:id="txtEmail" promptText="email@exemplo.com" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Nova senha" GridPane.rowIndex="4" />
+                <PasswordField fx:id="txtSenha" promptText="Deixe em branco para manter a atual" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label text="Status *" GridPane.rowIndex="5" />
+                <ComboBox fx:id="cmbStatus" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </children>
+        </GridPane>
+        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+            <children>
+                <Button onAction="#btnCancelarAction" text="Cancelar" />
+                <Button defaultButton="true" styleClass="button-primario" onAction="#btnSalvarAction" text="Salvar Alterações" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

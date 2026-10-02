@@ -8,32 +8,37 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="360.0" prefWidth="460.0" spacing="24.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.acesso.view.LoginController">
-    <padding>
-        <Insets bottom="28.0" left="40.0" right="40.0" top="28.0" />
-    </padding>
+<StackPane styleClass="login-fundo" prefHeight="420.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.acesso.view.LoginController">
     <children>
-        <Label style="-fx-font-size: 26px; -fx-font-weight: bold;" text="Controle de Acesso" />
-        <Label style="-fx-font-size: 14px;" text="Acesso administrativo" />
-        <GridPane hgap="12.0" vgap="14.0" maxWidth="360.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" minWidth="75.0" />
-                <ColumnConstraints hgrow="ALWAYS" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints />
-                <RowConstraints />
-            </rowConstraints>
+        <VBox alignment="CENTER" spacing="22.0" styleClass="login-cartao" maxWidth="360.0" maxHeight="-Infinity">
             <children>
-                <Label text="Login" />
-                <TextField fx:id="txtLogin" promptText="Digite seu login" GridPane.columnIndex="1" />
-                <Label text="Senha" GridPane.rowIndex="1" />
-                <PasswordField fx:id="pwdSenha" promptText="Digite sua senha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label styleClass="login-titulo" text="Controle de Acesso" />
+                <Label styleClass="login-subtitulo" text="Entre com suas credenciais de administrador" />
+                <GridPane hgap="12.0" vgap="14.0" maxWidth="320.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="70.0" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Login" />
+                        <TextField fx:id="txtLogin" promptText="Digite seu login" GridPane.columnIndex="1" />
+                        <Label text="Senha" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="pwdSenha" promptText="Digite sua senha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    </children>
+                </GridPane>
+                <Button defaultButton="true" maxWidth="Infinity" styleClass="button-primario" onAction="#btnLoginAction" text="Entrar" />
+                <Label styleClass="login-dica" text="Use admin / admin para o acesso de teste" />
             </children>
-        </GridPane>
-        <Button defaultButton="true" onAction="#btnLoginAction" prefWidth="140.0" text="Entrar" />
-        <Label style="-fx-font-size: 11px;" />
+            <padding>
+                <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+            </padding>
+        </VBox>
     </children>
-</VBox>
+</StackPane>

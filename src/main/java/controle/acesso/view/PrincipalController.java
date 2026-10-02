@@ -15,17 +15,35 @@ public class PrincipalController {
 
     @FXML
     public void initialize() {
-        lblBoasVindas.setText("Bem-vindo ao Controle de Acesso");
+        if (lblBoasVindas != null) {
+            lblBoasVindas.setText("Bem-vindo ao Controle de Acesso");
+        }
+        abrirDashboard();
     }
 
     @FXML
-    private void abrirCadastroUsuario() {
+    void abrirDashboard() {
+        abrirNoCentro("/controle/acesso/view/dashboard.fxml");
+    }
+
+    @FXML
+    void abrirCadastroUsuario() {
         abrirNoCentro("/controle/acesso/view/cadastroUsuario.fxml");
     }
 
     @FXML
-    private void abrirListaUsuarios() {
+    void abrirListaUsuarios() {
         abrirNoCentro("/controle/acesso/view/listaUsuarios.fxml");
+    }
+
+    @FXML
+    void abrirHistorico() {
+        abrirNoCentro("/controle/acesso/view/historico.fxml");
+    }
+
+    @FXML
+    void abrirRelatorioFrequencia() {
+        abrirNoCentro("/controle/acesso/view/relatorioFrequencia.fxml");
     }
 
     @FXML
@@ -36,9 +54,11 @@ public class PrincipalController {
         alert.setContentText(
                 "Projeto acadêmico Java + JavaFX + FXML + JDBC + MariaDB.\n\n"
                 + "Funções disponíveis:\n"
-                + "• Cadastrar usuário\n"
+                + "• Dashboard com indicadores\n"
+                + "• Cadastrar, editar e excluir usuário\n"
                 + "• Listar usuários\n"
-                + "• Controle de status do usuário"
+                + "• Histórico de acessos\n"
+                + "• Relatório de frequência"
         );
         alert.showAndWait();
     }
@@ -49,17 +69,25 @@ public class PrincipalController {
         stage.close();
     }
 
-    private void abrirNoCentro(String caminho) {
+    private Node abrirNoCentro(String caminho) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(caminho));
             Node tela = loader.load();
+
+            Object controller = loader.getController();
+            if (controller instanceof DashboardController dashboardController) {
+                dashboardController.setPrincipalController(this);
+            }
+
             painelPrincipal.setCenter(tela);
+            return tela;
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
             alert.setHeaderText("Não foi possível abrir a tela.");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
+            return null;
         }
     }
 }

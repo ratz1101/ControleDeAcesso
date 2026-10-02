@@ -1,45 +1,261 @@
+/* ===== Base ===== */
 .root {
     -fx-font-family: "Segoe UI", Arial, sans-serif;
-    -fx-background-color: #f5f7fa;
+    -fx-background-color: #F4F6FB;
+    -fx-font-size: 13px;
 }
 
 .label {
-    -fx-text-fill: #263238;
+    -fx-text-fill: #1F2937;
 }
 
+.label-secundario {
+    -fx-text-fill: #6B7280;
+    -fx-font-size: 12.5px;
+}
+
+.titulo-pagina {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+
+.subtitulo-pagina {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: #6B7280;
+}
+
+/* ===== Botões ===== */
 .button {
+    -fx-background-color: #EEF1F8;
+    -fx-text-fill: #273348;
+    -fx-background-radius: 7;
     -fx-padding: 8 18 8 18;
     -fx-cursor: hand;
+    -fx-font-size: 12.5px;
+}
+.button:hover {
+    -fx-background-color: #E1E6F5;
+}
+.button:armed {
+    -fx-background-color: #D4DAF2;
 }
 
-.text-field, .password-field, .combo-box {
+.button-primario {
+    -fx-background-color: #3B5BDB;
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+}
+.button-primario:hover {
+    -fx-background-color: #3250C4;
+}
+.button-primario:armed {
+    -fx-background-color: #2B46AD;
+}
+
+.button-perigo {
+    -fx-background-color: #FDECEC;
+    -fx-text-fill: #C0392B;
+}
+.button-perigo:hover {
+    -fx-background-color: #FAD7D5;
+}
+
+.button-sutil {
+    -fx-background-color: transparent;
+    -fx-text-fill: #3B5BDB;
+    -fx-padding: 6 10 6 10;
+}
+.button-sutil:hover {
+    -fx-background-color: #E9EDFB;
+}
+
+.button-pequeno {
+    -fx-padding: 4 12 4 12;
+    -fx-font-size: 11.5px;
+}
+
+/* ===== Campos ===== */
+.text-field, .password-field, .combo-box, .date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #D7DCE5;
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
     -fx-pref-height: 34px;
 }
+.text-field:focused, .password-field:focused,
+.combo-box:focused, .date-picker:focused {
+    -fx-border-color: #3B5BDB;
+}
+.combo-box .list-cell {
+    -fx-text-fill: #1F2937;
+}
 
+/* ===== Tabela ===== */
 .table-view {
-    -fx-border-color: #d0d7de;
     -fx-background-color: white;
+    -fx-border-color: #E3E8F0;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
+    -fx-padding: 0;
+}
+.table-view .column-header-background {
+    -fx-background-color: #F7F9FC;
+    -fx-background-radius: 9 9 0 0;
+}
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-font-weight: 600;
+    -fx-text-fill: #475267;
+    -fx-size: 36px;
+}
+.table-view .table-cell {
+    -fx-text-fill: #1F2937;
+    -fx-alignment: CENTER_LEFT;
+}
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-border-color: transparent #F0F2F7 transparent transparent;
+}
+.table-row-cell:odd {
+    -fx-background-color: #FAFBFD;
+}
+.table-row-cell:selected {
+    -fx-background-color: #E8ECFB;
+}
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: #1F2937;
 }
 
-.table-view .column-header {
+/* ===== Badges de status / resultado ===== */
+.badge {
+    -fx-padding: 3 12 3 12;
+    -fx-background-radius: 20;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-alignment: CENTER;
+}
+.badge-positivo {
+    -fx-background-color: #E3F6EA;
+    -fx-text-fill: #1E8449;
+}
+.badge-negativo {
+    -fx-background-color: #FDEAEA;
+    -fx-text-fill: #C0392B;
+}
+
+/* ===== Cards (dashboard) ===== */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #E8EBF2;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 18 20 18 20;
+    -fx-effect: dropshadow(gaussian, rgba(31,41,55,0.07), 12, 0, 0, 3);
+}
+.card-rotulo {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6B7280;
+    -fx-font-weight: 600;
+}
+.card-valor {
+    -fx-font-size: 30px;
     -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+.card-azul .card-valor { -fx-text-fill: #3B5BDB; }
+.card-verde .card-valor { -fx-text-fill: #1E8449; }
+.card-vermelho .card-valor { -fx-text-fill: #C0392B; }
+.card-laranja .card-valor { -fx-text-fill: #C2740B; }
+
+.painel {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #E8EBF2;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 20;
 }
 
+/* ===== Menu / barra superior ===== */
 .menu-bar {
-    -fx-padding: 4px;
-    -fx-background-color: #e9eef3;
+    -fx-padding: 8 16 8 16;
+    -fx-background-color: linear-gradient(to right, #3B5BDB, #5471E6);
 }
-
-.menu-bar .menu:hover,
-.menu-bar .menu:showing {
-    -fx-background-color: #d7e1ea;
+.menu-bar .label {
+    -fx-text-fill: white;
+}
+.menu-bar .menu-button {
+    -fx-background-radius: 6;
+}
+.menu-bar .menu-button:hover,
+.menu-bar .menu-button:showing {
+    -fx-background-color: rgba(255,255,255,0.18);
+}
+.menu-bar .menu .label {
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+}
+.context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-color: #E3E8F0;
+    -fx-border-radius: 8;
+    -fx-padding: 4;
+}
+.menu-item .label {
+    -fx-text-fill: #1F2937;
+}
+.menu-item:focused {
+    -fx-background-color: #EEF1F8;
+    -fx-background-radius: 6;
 }
 
 .tela-principal {
-    -fx-background-color: #f5f7fa;
+    -fx-background-color: #F4F6FB;
 }
 
-.titulo-boas-vindas {
-    -fx-font-size: 20px;
+.marca-topo {
+    -fx-font-size: 15px;
     -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* ===== Separador ===== */
+.separator *.line {
+    -fx-border-color: #E8EBF2;
+}
+
+/* ===== Login ===== */
+.login-fundo {
+    -fx-background-color: linear-gradient(to bottom right, #3B5BDB, #1F2E7A);
+}
+.login-cartao {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.35), 28, 0, 0, 10);
+}
+.login-titulo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F2937;
+}
+.login-subtitulo {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: #6B7280;
+}
+.login-dica {
+    -fx-font-size: 11px;
+    -fx-text-fill: #9AA3B2;
+}
+
+/* ===== Alert ===== */
+.dialog-pane {
+    -fx-background-color: white;
+}
+.dialog-pane .header-panel {
+    -fx-background-color: #F7F9FC;
 }
