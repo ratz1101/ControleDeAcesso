@@ -25,7 +25,7 @@
             <children>
                 <TextField fx:id="txtBusca" promptText="Buscar por nome, CPF ou e-mail" HBox.hgrow="ALWAYS" />
                 <Button onAction="#btnBuscarAction" text="Buscar" />
-                <Button styleClass="button-sutil" onAction="#btnListarAction" text="Limpar Busca" />
+                <Button styleClass="button-sutil" onAction="#btnLimparBuscaAction" text="Limpar Busca" />
             </children>
         </HBox>
 

@@ -182,17 +182,18 @@
 /* ===== Menu / barra superior ===== */
 .menu-bar {
     -fx-padding: 8 16 8 16;
-    -fx-background-color: linear-gradient(to right, #3B5BDB, #5471E6);
+    -fx-background-color: #000000;
 }
 .menu-bar .label {
     -fx-text-fill: white;
 }
 .menu-bar .menu-button {
+    -fx-background-color: #000000;
     -fx-background-radius: 6;
 }
 .menu-bar .menu-button:hover,
 .menu-bar .menu-button:showing {
-    -fx-background-color: rgba(255,255,255,0.18);
+    -fx-background-color: #2B2B2B;
 }
 .menu-bar .menu .label {
     -fx-text-fill: white;
@@ -205,8 +206,17 @@
     -fx-border-radius: 8;
     -fx-padding: 4;
 }
-.menu-item .label {
-    -fx-text-fill: #1F2937;
+/* Especificidade alta + !important: o dropdown de um Menu da MenuBar
+   herda ".menu-bar .menu .label" (branco) via "styleable parent" do
+   JavaFX, mesmo sendo um popup separado. Sem isso, o texto dos itens
+   fica branco sobre fundo claro (quase invisível). */
+.context-menu .menu-item .label,
+.menu-bar .menu-item .label {
+    -fx-text-fill: #1F2937 !important;
+    -fx-font-weight: 400;
+}
+.menu-item:focused .label {
+    -fx-text-fill: #1F2937 !important;
 }
 .menu-item:focused {
     -fx-background-color: #EEF1F8;

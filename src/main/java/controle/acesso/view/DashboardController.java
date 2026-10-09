@@ -5,6 +5,7 @@ import controle.acesso.dao.UsuarioDAO;
 import controle.acesso.model.LogAcesso;
 import controle.acesso.model.ResultadoAcessoEnum;
 import controle.acesso.model.StatusEnum;
+import controle.acesso.model.TipoAcessoEnum;
 import controle.acesso.model.Usuario;
 import controle.acesso.view.util.DateUtils;
 import javafx.collections.FXCollections;
@@ -30,8 +31,8 @@ public class DashboardController {
     @FXML private TableView<LogAcesso> tblUltimos;
     @FXML private TableColumn<LogAcesso, String> colUsuario;
     @FXML private TableColumn<LogAcesso, LocalDateTime> colData;
-    @FXML private TableColumn<LogAcesso, String> colTipo;
-    @FXML private TableColumn<LogAcesso, String> colResultado;
+    @FXML private TableColumn<LogAcesso, TipoAcessoEnum> colTipo;
+    @FXML private TableColumn<LogAcesso, ResultadoAcessoEnum> colResultado;
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     private final LogAcessoDAO logAcessoDAO = new LogAcessoDAO();
@@ -59,15 +60,15 @@ public class DashboardController {
         colResultado.setCellValueFactory(new PropertyValueFactory<>("resultado"));
         colResultado.setCellFactory(column -> new TableCell<>() {
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(ResultadoAcessoEnum item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
                     return;
                 }
-                Label badge = new Label(item);
+                Label badge = new Label(item.name());
                 badge.getStyleClass().add("badge");
-                badge.getStyleClass().add("AUTORIZADO".equals(item) ? "badge-positivo" : "badge-negativo");
+                badge.getStyleClass().add(item == ResultadoAcessoEnum.AUTORIZADO ? "badge-positivo" : "badge-negativo");
                 setAlignment(Pos.CENTER_LEFT);
                 setGraphic(badge);
             }

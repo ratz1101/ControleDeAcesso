@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 
 <BorderPane fx:id="painelPrincipal" prefHeight="640.0" prefWidth="960.0"
             styleClass="tela-principal"
@@ -43,12 +41,4 @@
             </menus>
         </MenuBar>
     </top>
-    <center>
-        <Label fx:id="lblBoasVindas"
-               styleClass="titulo-boas-vindas"
-               text="Bem-vindo!"
-               BorderPane.alignment="CENTER"
-               visible="false"
-               managed="false" />
-    </center>
 </BorderPane>

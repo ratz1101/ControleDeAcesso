@@ -5,19 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class PrincipalController {
     @FXML private BorderPane painelPrincipal;
-    @FXML private Label lblBoasVindas;
 
     @FXML
     public void initialize() {
-        if (lblBoasVindas != null) {
-            lblBoasVindas.setText("Bem-vindo ao Controle de Acesso");
-        }
         abrirDashboard();
     }
 

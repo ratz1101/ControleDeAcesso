@@ -36,7 +36,7 @@ public class ListaUsuariosController {
     @FXML private TableColumn<Usuario, String> colCpf;
     @FXML private TableColumn<Usuario, String> colCargo;
     @FXML private TableColumn<Usuario, String> colEmail;
-    @FXML private TableColumn<Usuario, String> colStatus;
+    @FXML private TableColumn<Usuario, StatusEnum> colStatus;
     @FXML private TableColumn<Usuario, LocalDateTime> colData;
     @FXML private TableColumn<Usuario, Void> colAcoes;
     @FXML private TextField txtBusca;
@@ -54,15 +54,15 @@ public class ListaUsuariosController {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colStatus.setCellFactory(column -> new TableCell<>() {
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(StatusEnum item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
                     return;
                 }
-                Label badge = new Label(item);
+                Label badge = new Label(item.name());
                 badge.getStyleClass().add("badge");
-                badge.getStyleClass().add("ATIVO".equals(item) ? "badge-positivo" : "badge-negativo");
+                badge.getStyleClass().add(item == StatusEnum.ATIVO ? "badge-positivo" : "badge-negativo");
                 setAlignment(Pos.CENTER_LEFT);
                 setGraphic(badge);
             }
@@ -102,6 +102,12 @@ public class ListaUsuariosController {
     @FXML
     private void btnListarAction() {
         carregarUsuarios(true);
+    }
+
+    @FXML
+    private void btnLimparBuscaAction() {
+        txtBusca.clear();
+        carregarUsuarios(false);
     }
 
     @FXML
