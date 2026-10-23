@@ -80,15 +80,36 @@ public class UsuarioDAO {
         }
     }
 
-    // AÇÃO JDBC 7: EXCLUIR USUÁRIO (DELETE + PreparedStatement)
-    public void excluirUsuario(int idUsuario) throws SQLException {
-        String sql = "DELETE FROM usuario WHERE id_usuario = ?";
+    // Inativa o usuário (mantém cadastro e registros de acesso).
+    public void inativarUsuario(int idUsuario) throws SQLException {
+        String sql = "UPDATE usuario SET status = ? WHERE id_usuario = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, idUsuario);
+            stmt.setString(1, StatusEnum.INATIVO.name());
+            stmt.setInt(2, idUsuario);
             stmt.executeUpdate();
+        }
+    }
+
+    // AÇÃO JDBC 7: EXCLUIR USUÁRIO (DELETE + PreparedStatement)
+    // Apaga todos os registros de acesso do usuário e o próprio usuário, em transação.
+    public void excluirUsuario(int idUsuario) throws SQLException {
+        try (Connection conn = Conexao.conectar()) {
+            conn.setAutoCommit(false);
+            try (PreparedStatement logs = conn.prepareStatement("DELETE FROM log_acesso WHERE id_usuario = ?");
+                 PreparedStatement usuario = conn.prepareStatement("DELETE FROM usuario WHERE id_usuario = ?")) {
+
+                logs.setInt(1, idUsuario);
+                logs.executeUpdate();
+                usuario.setInt(1, idUsuario);
+                usuario.executeUpdate();
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
         }
     }
 

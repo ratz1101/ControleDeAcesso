@@ -25,6 +25,7 @@ public class DashboardController {
 
     @FXML private Label lblAtivos;
     @FXML private Label lblBloqueados;
+    @FXML private Label lblInativos;
     @FXML private Label lblAcessosHoje;
     @FXML private Label lblNegadosHoje;
 
@@ -82,11 +83,14 @@ public class DashboardController {
             List<Usuario> usuarios = usuarioDAO.listarUsuarios();
             long ativos = usuarios.stream().filter(u -> u.getStatus() == StatusEnum.ATIVO).count();
             long bloqueados = usuarios.stream().filter(u -> u.getStatus() == StatusEnum.BLOQUEADO).count();
+            long inativos = usuarios.stream().filter(u -> u.getStatus() == StatusEnum.INATIVO).count();
+            lblInativos.setText(String.valueOf(inativos));
             lblAtivos.setText(String.valueOf(ativos));
             lblBloqueados.setText(String.valueOf(bloqueados));
         } catch (Exception e) {
             lblAtivos.setText("-");
             lblBloqueados.setText("-");
+            lblInativos.setText("-");
         }
 
         try {

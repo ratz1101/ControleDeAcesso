@@ -118,6 +118,21 @@ public class LogAcessoDAO {
         }
     }
 
+    // Quantidade de registros de acesso de um usuário (decide entre inativar e excluir)
+    public int contarPorUsuario(int idUsuario) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM log_acesso WHERE id_usuario = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idUsuario);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        }
+    }
+
     // AÇÃO JDBC 5: RELATÓRIO DE FREQUÊNCIA (SELECT agregado por usuário, em um período)
     public List<FrequenciaUsuario> listarFrequencia(LocalDateTime inicio, LocalDateTime fim) throws SQLException {
         String sql =

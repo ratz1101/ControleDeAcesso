@@ -82,7 +82,9 @@
     -fx-border-radius: 7;
     -fx-background-radius: 7;
     -fx-pref-height: 34px;
+    -fx-min-height: 34px;
 }
+.table-view .column-header .label { -fx-alignment: CENTER_LEFT; }
 .text-field:focused, .password-field:focused,
 .combo-box:focused, .date-picker:focused {
     -fx-border-color: #3B5BDB;
@@ -145,6 +147,20 @@
     -fx-text-fill: #C0392B;
 }
 
+.badge-neutro {
+    -fx-background-color: #ECEEF2;
+    -fx-text-fill: #6B7280;
+}
+
+/* ===== Barra de filtros (alinhada à tabela abaixo) ===== */
+.barra-filtros {
+    -fx-background-color: white;
+    -fx-background-radius: 9;
+    -fx-border-color: #E3E8F0;
+    -fx-border-radius: 9;
+    -fx-padding: 10 12 10 12;
+}
+
 /* ===== Cards (dashboard) ===== */
 .card {
     -fx-background-color: white;
@@ -169,6 +185,7 @@
 .card-verde .card-valor { -fx-text-fill: #1E8449; }
 .card-vermelho .card-valor { -fx-text-fill: #C0392B; }
 .card-laranja .card-valor { -fx-text-fill: #C2740B; }
+.card-cinza .card-valor { -fx-text-fill: #6B7280; }
 
 .painel {
     -fx-background-color: white;

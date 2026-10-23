@@ -2,5 +2,6 @@ package controle.acesso.model;
 
 public enum StatusEnum {
     ATIVO,
-    BLOQUEADO
+    BLOQUEADO,
+    INATIVO
 }

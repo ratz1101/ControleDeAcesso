@@ -114,7 +114,8 @@ public class HistoricoController {
             cmbUsuarioFiltro.getItems().addAll(usuarios);
             cmbUsuarioFiltro.setValue(null);
 
-            cmbUsuarioRegistro.getItems().setAll(usuarios);
+            cmbUsuarioRegistro.getItems().setAll(usuarios.stream()
+                    .filter(u -> u.getStatus() != controle.acesso.model.StatusEnum.INATIVO).toList());
         } catch (Exception e) {
             mostrar(Alert.AlertType.ERROR, "Não foi possível carregar os usuários:\n" + e.getMessage());
         }

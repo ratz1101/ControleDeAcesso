@@ -21,7 +21,7 @@
             </children>
         </VBox>
 
-        <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="barra-filtros">
             <children>
                 <Label text="De:" />
                 <DatePicker fx:id="dtInicio" prefWidth="140.0" />
@@ -31,7 +31,7 @@
             </children>
         </HBox>
 
-        <TableView fx:id="tblFrequencia" VBox.vgrow="ALWAYS">
+        <TableView fx:id="tblFrequencia" VBox.vgrow="ALWAYS" columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
             <columns>
                 <TableColumn fx:id="colNome" prefWidth="180.0" text="Nome" />
                 <TableColumn fx:id="colCargo" prefWidth="120.0" text="Cargo" />

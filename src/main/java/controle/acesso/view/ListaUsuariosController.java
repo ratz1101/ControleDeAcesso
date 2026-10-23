@@ -1,6 +1,7 @@
 package controle.acesso.view;
 
 import controle.acesso.Main;
+import controle.acesso.dao.LogAcessoDAO;
 import controle.acesso.dao.UsuarioDAO;
 import controle.acesso.model.StatusEnum;
 import controle.acesso.model.Usuario;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -42,6 +44,7 @@ public class ListaUsuariosController {
     @FXML private TextField txtBusca;
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private final LogAcessoDAO logAcessoDAO = new LogAcessoDAO();
 
     @FXML
     public void initialize() {
@@ -62,7 +65,11 @@ public class ListaUsuariosController {
                 }
                 Label badge = new Label(item.name());
                 badge.getStyleClass().add("badge");
-                badge.getStyleClass().add(item == StatusEnum.ATIVO ? "badge-positivo" : "badge-negativo");
+                badge.getStyleClass().add(switch (item) {
+                    case ATIVO -> "badge-positivo";
+                    case BLOQUEADO -> "badge-negativo";
+                    case INATIVO -> "badge-neutro";
+                });
                 setAlignment(Pos.CENTER_LEFT);
                 setGraphic(badge);
             }
@@ -175,19 +182,67 @@ public class ListaUsuariosController {
     }
 
     private void excluirUsuario(Usuario usuario) {
-        Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacao.setTitle("Excluir usuário");
-        confirmacao.setHeaderText("Excluir " + usuario.getNome() + "?");
-        confirmacao.setContentText("Essa ação não pode ser desfeita. Os registros de acesso desse usuário serão mantidos, sem vínculo.");
+        int registros;
+        try {
+            registros = logAcessoDAO.contarPorUsuario(usuario.getIdUsuario());
+        } catch (Exception e) {
+            mostrarErroBanco(e);
+            return;
+        }
 
-        Optional<ButtonType> resposta = confirmacao.showAndWait();
-        if (resposta.isPresent() && resposta.get() == ButtonType.OK) {
+        if (registros == 0) {
+            Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacao.setTitle("Excluir usuário");
+            confirmacao.setHeaderText("Excluir " + usuario.getNome() + "?");
+            confirmacao.setContentText("Esse usuário não possui registros de acesso. Essa ação não pode ser desfeita.");
+            Optional<ButtonType> resposta = confirmacao.showAndWait();
+            if (resposta.isPresent() && resposta.get() == ButtonType.OK) {
+                executarExclusao(usuario);
+            }
+            return;
+        }
+
+        ButtonType btnInativar = new ButtonType("Inativar", ButtonBar.ButtonData.OK_DONE);
+        ButtonType btnExcluirTudo = new ButtonType("Excluir tudo", ButtonBar.ButtonData.OTHER);
+        ButtonType btnCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        Alert opcoes = new Alert(Alert.AlertType.CONFIRMATION, null, btnInativar, btnExcluirTudo, btnCancelar);
+        opcoes.setTitle("Usuário com registros");
+        opcoes.setHeaderText(usuario.getNome() + " possui " + registros + " registro(s) de acesso.");
+        opcoes.setContentText("Recomendado: inativar o usuário, mantendo o histórico.\n"
+                + "Excluir tudo remove o usuário e todos os registros dele, sem volta.");
+
+        Optional<ButtonType> escolha = opcoes.showAndWait();
+        if (escolha.isEmpty() || escolha.get() == btnCancelar) {
+            return;
+        }
+
+        if (escolha.get() == btnInativar) {
             try {
-                usuarioDAO.excluirUsuario(usuario.getIdUsuario());
+                usuarioDAO.inativarUsuario(usuario.getIdUsuario());
                 carregarUsuarios(false);
             } catch (Exception e) {
                 mostrarErroBanco(e);
             }
+            return;
+        }
+
+        Alert certeza = new Alert(Alert.AlertType.WARNING, null, ButtonType.YES, ButtonType.NO);
+        certeza.setTitle("Excluir definitivamente");
+        certeza.setHeaderText("Apagar " + usuario.getNome() + " e " + registros + " registro(s)?");
+        certeza.setContentText("Essa ação não pode ser desfeita.");
+        Optional<ButtonType> confirmou = certeza.showAndWait();
+        if (confirmou.isPresent() && confirmou.get() == ButtonType.YES) {
+            executarExclusao(usuario);
+        }
+    }
+
+    private void executarExclusao(Usuario usuario) {
+        try {
+            usuarioDAO.excluirUsuario(usuario.getIdUsuario());
+            carregarUsuarios(false);
+        } catch (Exception e) {
+            mostrarErroBanco(e);
         }
     }
 

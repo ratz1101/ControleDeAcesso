@@ -21,7 +21,7 @@
             </children>
         </VBox>
 
-        <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="barra-filtros">
             <children>
                 <TextField fx:id="txtBusca" promptText="Buscar por nome, CPF ou e-mail" HBox.hgrow="ALWAYS" />
                 <Button onAction="#btnBuscarAction" text="Buscar" />
@@ -29,7 +29,7 @@
             </children>
         </HBox>
 
-        <TableView fx:id="tblUsuarios" VBox.vgrow="ALWAYS">
+        <TableView fx:id="tblUsuarios" VBox.vgrow="ALWAYS" columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
                 <TableColumn fx:id="colNome" prefWidth="160.0" text="Nome" />
